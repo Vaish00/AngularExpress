@@ -1,0 +1,100 @@
+<div style="text-align:center">
+    <h1>
+        Welcome to !
+    </h1>
+</div>
+
+<mat-toolbar>
+    <mat-toolbar-row>
+        <button mat-raised-button color="primary" (click)="showDialog()">Upload File</button>
+
+
+    </mat-toolbar-row>
+
+</mat-toolbar>
+
+<p-dialog header="Bulk Upload" [(visible)]="display">
+
+    <mat-toolbar>
+        <form [formGroup]="bulkUploadForm">
+            <mat-toolbar-row>
+                <label class="d-block">Upload Xls</label>
+                <input type="file" formControlName="xls_file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" (change)="onSelectFile($event)"
+                    id="xls_file" />
+
+            </mat-toolbar-row>
+            <mat-toolbar-row>
+
+                <a href="https://docs.google.com/spreadsheets/d/1Tow00G0RRBo1V2X6l67aQePUkHGLahkeICkaXdo_rKg/edit#gid=0"
+                    class="float-left mt-3">Sample File</a>
+            </mat-toolbar-row>
+            <mat-toolbar-row>
+                <button mat-raised-button color="primary" type="button" class="btn btn-primary" (click)="bulkUpload()">
+                    Bulk Upload
+                </button>
+            </mat-toolbar-row>
+        </form>
+ 
+    </mat-toolbar>
+
+    <!-- <div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+        <form [formGroup]="bulkUploadForm">
+            <div fxFlex="100%">
+                <label class="d-block">Upload CSV</label>
+                <input type="file" formControlName="xls_file" accept=".csv" (change)="onSelectFile($event)"
+                    id="xls_file" />
+            </div>
+            <div fxFlex="100%">
+                
+                <a href="https://b2bexch.s3.amazonaws.com/bulkupload/1590666703153_Sample_product_file.csv"
+                    class="float-left mt-3">Sample File</a>
+            </div>
+            <div fxFlex="100%">
+                <button mat-raised-button color="primary" type="button" [disabled]="
+                this.bulkUploadForm.value.xls_file == null ||
+                undefined ||
+                ''
+              " [ngClass]="{
+                nocursor:
+                  this.bulkUploadForm.value.xls_file == null ||
+                  undefined ||
+                  ''
+              }" class="btn btn-primary" (click)="bulkUpload()">
+              Bulk Upload
+          </button>
+            </div>
+</form>
+       
+      
+      </div> -->
+</p-dialog>
+
+    <table mat-table [dataSource]="templateData" class="mat-elevation-z8">
+
+        
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="PartNumber">
+          <th mat-header-cell *matHeaderCellDef> Part Number </th>
+          <td mat-cell *matCellDef="let element"> {{element.part_number}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="OESOEM">
+          <th mat-header-cell *matHeaderCellDef> OES/OEM </th>
+          <td mat-cell *matCellDef="let element"> {{element.oes_oem}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="PartName">
+          <th mat-header-cell *matHeaderCellDef> Part Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.part_name}} </td>
+        </ng-container>
+  
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
